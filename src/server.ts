@@ -1,2 +1,3 @@
-
-as
+const server = async() =>{
+      return 
+}
