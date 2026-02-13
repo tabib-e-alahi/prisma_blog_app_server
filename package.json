@@ -19,8 +19,12 @@
   },
   "homepage": "https://github.com/tabib-e-alahi/prisma_blog_app_server#readme",
   "dependencies": {
+    "@prisma/adapter-pg": "^7.4.0",
+    "@prisma/client": "^7.4.0",
     "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "pg": "^8.18.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
