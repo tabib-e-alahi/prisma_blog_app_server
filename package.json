@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/tabib-e-alahi/prisma_blog_app_server/issues"
   },
-  "homepage": "https://github.com/tabib-e-alahi/prisma_blog_app_server#readme"
+  "homepage": "https://github.com/tabib-e-alahi/prisma_blog_app_server#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "typescript": "^5.9.3"
+  }
 }
