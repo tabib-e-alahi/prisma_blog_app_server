@@ -1,5 +1,5 @@
-const createPost = () => {
-    console.log("create post sercvice");
+const createPost = ({title, content}) => {
+    console
 };
 
 export const postService = {

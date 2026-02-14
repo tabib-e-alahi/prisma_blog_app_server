@@ -3,13 +3,13 @@ import { postService } from "./post.service";
 
 const createPost: RequestHandler = async (req, res) => {
     try {
-      const result = await postService.createPost(req.body);
-      console.log(result);
-      return res.status(201).json({
+        const result = await postService.createPost(req.body);
+        console.log(result);
+        return res.status(201).json({
             success: true,
             message: "Post created successfully.",
-            data
-      })
+            data: result,
+        });
     } catch (error: any) {
         return res.status(500).json({
             success: false,
