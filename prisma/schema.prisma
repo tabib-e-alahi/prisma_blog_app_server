@@ -47,7 +47,7 @@ model Comment {
   authorId  String
   postId    String
   parentId  String?
-  parent 
+  parent @relation("")
   statur    CommentStatus @default(APPROVED)
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
