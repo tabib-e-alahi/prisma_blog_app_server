@@ -18,5 +18,9 @@ model Post{
   title String
   content String
   thumbnail String?
-  isFeatured Boolean @default()
+  isFeatured Boolean @default(false)
+  status String
+  tags String[]
+  views Int @default(0)
+  authorId String
 }
