@@ -33,18 +33,18 @@ model Post {
   updatedAt  DateTime   @updatedAt
 }
 
-enum CommentStatus{
+enum CommentStatus {
   APPROVED
   REJECT
 }
 
-model Comment{
-  id String @id @default(uuid())
-  content String
-  authorId String
-  postId String
-  parentId String?
-  statur String
-  createdAt  DateTime   @default(now())
-  updatedAt DateTime @updatedAt
+model Comment {
+  id        String        @id @default(uuid())
+  content   String
+  authorId  String
+  postId    String
+  parentId  String?
+  statur    CommentStatus @default()
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 }
