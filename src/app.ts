@@ -13,7 +13,7 @@ app.use(
 );
 
 app.get("/test_route", (req, res)=>{
-    res.send("Server is ruuning")
+    res.send("Server is ruuning Smoothly.")
 })
 
 export default app;
