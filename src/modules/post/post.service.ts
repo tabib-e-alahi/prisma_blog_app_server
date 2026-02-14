@@ -6,7 +6,7 @@ const createPost = async (data: Post) => {
         data,
     });
 
-    return result.send()
+    return result;
 };
 
 export const postService = {
