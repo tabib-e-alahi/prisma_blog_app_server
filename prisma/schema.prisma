@@ -47,8 +47,8 @@ model Comment {
   authorId  String
   postId    String
   parentId  String?
-  parent    Comment       @relation("CommentReplies", fields: [parentId], references: [id])
-  replies  Comment[] @relation("postId")
+  parent    Comment?      @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[]     @relation("CommentReplies")
   statur    CommentStatus @default(APPROVED)
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
