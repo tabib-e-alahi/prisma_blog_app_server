@@ -12,4 +12,6 @@ app.use(
     }),
 );
 
+app.get("/test_route")
+
 export default app;
