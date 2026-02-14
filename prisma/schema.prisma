@@ -34,5 +34,10 @@ model Post {
 }
 
 model Comment{
-  id String @
+  id String @id @default(uuid())
+  content String
+  authorId String
+  postId String
+  parentId String?
+  statur String
 }
