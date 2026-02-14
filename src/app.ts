@@ -12,6 +12,8 @@ app.use(
     }),
 );
 
-app.get("/test_route")
+app.get("/test_route", (req, res)=>{
+    res.send("Server is ruuning")
+})
 
 export default app;
