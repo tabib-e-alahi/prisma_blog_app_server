@@ -47,9 +47,12 @@ model Comment {
   authorId  String
   postId    String
   parentId  String?
+  parent 
   statur    CommentStatus @default(APPROVED)
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
 
-  @@index([])
+  @@index([authorId])
+  @@index([postId])
+  @@map("comments")
 }
