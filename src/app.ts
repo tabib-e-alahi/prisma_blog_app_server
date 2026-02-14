@@ -13,10 +13,10 @@ app.use(
     }),
 );
 
-app.use("/posts", postRouter)
+app.use("/posts", postRouter);
 
-app.get("/test_route", (req, res)=>{
-    res.send("Server is ruuning Smoothly.")
-})
+app.get("/test_route", (req, res) => {
+    res.send("Server is ruuning Smoothly.");
+});
 
 export default app;
