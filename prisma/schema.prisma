@@ -13,6 +13,12 @@ datasource db {
   provider = "postgresql"
 }
 
+enum PostStatus{
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
 model Post{
   id String @id @default(uuid())
   title String
@@ -24,5 +30,4 @@ model Post{
   views Int @default(0)
   authorId String
   createdAt DateTime @default(now())
-  updatedAt
 }
