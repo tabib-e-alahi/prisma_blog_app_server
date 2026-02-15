@@ -22,6 +22,10 @@ const createPost: RequestHandler = async (req, res) => {
     }
 };
 
+const getAllPosts: RequestHandler = async(req, res) =>{
+    
+}
+
 export const postController = {
     createPost,
 };
