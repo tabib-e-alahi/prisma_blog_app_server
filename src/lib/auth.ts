@@ -44,7 +44,7 @@ export const auth = betterAuth({
     },
     emailVerification: {
         sendOnSignUp: true,
-        sendOnSignIn: false,
+        autoSignInAfterVerification: true,
         sendVerificationEmail: async ({ user, url, token }, request) => {
             try {
                 const verificationUrl = `${process.env.FRONEND_URL}/verify-email?token=${token}`;
@@ -114,6 +114,8 @@ export const auth = betterAuth({
                   </body>
                   </html>`,
                 });
+
+                console.log(info);
             } catch (error: any) {
                 console.error(error);
                 throw new Error(error.message);
