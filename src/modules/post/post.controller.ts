@@ -24,9 +24,9 @@ const createPost: RequestHandler = async (req, res) => {
 
 const getAllPosts: RequestHandler = async (req, res) => {
     try {
-        const {search} = req.query;
-        console.log(search);
-        const result = await postService.getAllPosts();
+        const search =
+            typeof req.query.search === "string" ? req.query.search : undefined;
+        const result = await postService.getAllPosts(search);
 
         return res.status(201).json({
             success: true,
