@@ -6,7 +6,7 @@ const createPost: RequestHandler = async (req, res) => {
         if (!req.user) {
             throw new Error("Unauthorized Access");
         }
-        const result = await postService.createPost(req.body, req.user.);
+        const result = await postService.createPost(req.body, req.user.id);
         console.log(result);
         return res.status(201).json({
             success: true,
