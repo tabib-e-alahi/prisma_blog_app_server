@@ -44,12 +44,73 @@ export const auth = betterAuth({
     },
     emailVerification: {
         sendVerificationEmail: async ({ user, url, token }, request) => {
+            const verificationUrl = `${process.env.FRONEND_URL}/verify-email?token=${token}`;
             const info = await transporter.sendMail({
                 from: '"Maddison Foo Koch" <maddison53@ethereal.email>',
                 to: "bar@example.com, baz@example.com",
                 subject: "Hello ✔",
                 text: "Hello world?", // Plain-text version of the message
-                html: "<b>Hello world?</b>", // HTML version of the message
+                html: `
+                  <!doctype html>
+                  <html>
+                  <head>
+                        <meta charset="UTF-8" />
+                        <title>Email Verification</title>
+                  </head>
+                  <body
+                        style="
+                              font-family: Arial, sans-serif;
+                              background-color: #f4f6f8;
+                              padding: 20px;
+                        "
+                  >
+                        <div
+                              style="
+                              max-width: 600px;
+                              margin: auto;
+                              background: #ffffff;
+                              padding: 30px;
+                              border-radius: 8px;
+                              "
+                        >
+                              <h2 style="color: #333">Verify Your Email Address</h2>
+
+                              <p style="color: #555">Hello ${user.name || "User"},</p>
+
+                              <p style="color: #555">
+                              Thank you for signing up for <strong>Prisma Blog</strong>.
+                              Please click the button below to verify your email address.
+                              </p>
+
+                              <div style="text-align: center; margin: 30px 0">
+                              <a
+                                    href="${verificationUrl}"
+                                    style="
+                                          background-color: #4f46e5;
+                                          color: white;
+                                          padding: 12px 25px;
+                                          text-decoration: none;
+                                          border-radius: 6px;
+                                          font-size: 16px;
+                                    "
+                              >
+                                    Verify Email
+                              </a>
+                              </div>
+
+                              <p style="color: #777; font-size: 14px">
+                              If you didn’t create an account, you can safely ignore this
+                              email.
+                              </p>
+
+                              <hr style="margin: 20px 0" />
+
+                              <p style="color: #999; font-size: 12px; text-align: center">
+                              © ${new Date().getFullYear()} Prisma Blog. All rights reserved.
+                              </p>
+                        </div>
+                  </body>
+                  </html>`,
             });
         },
     },
