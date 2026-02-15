@@ -50,6 +50,8 @@ const auth = (...roles: UserRole[]) => {
             emailVerified: session.user.emailVerified,
         };
 
+        if(roles && !roles.includes(req.user.role as UserRole))
+
         next();
     };
 };
