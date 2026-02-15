@@ -22,10 +22,25 @@ const createPost: RequestHandler = async (req, res) => {
     }
 };
 
-const getAllPosts: RequestHandler = async(req, res) =>{
-    
-}
+const getAllPosts: RequestHandler = async (req, res) => {
+    try {
+        const result = await postService.getAllPosts();
+
+        return res.status(201).json({
+            success: true,
+            message: "Post data retrieved successfully",
+            data: result,
+        });
+    } catch (error: any) {
+        return res.status(500).json({
+            success: false,
+            message: "Post data fetching failed",
+            error: error.message,
+        });
+    }
+};
 
 export const postController = {
     createPost,
+    getAllPosts,
 };
