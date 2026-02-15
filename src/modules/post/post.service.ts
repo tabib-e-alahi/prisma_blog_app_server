@@ -16,13 +16,7 @@ const createPost = async (
 };
 
 const getAllPosts = async () => {
-    const result = await prisma.post.findMany({
-        include:{
-            user:{
-                
-            }
-        }
-    });
+    const result = await prisma.post.findMany();
     return result;
 };
 
