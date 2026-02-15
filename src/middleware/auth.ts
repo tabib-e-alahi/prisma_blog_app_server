@@ -22,42 +22,47 @@ declare global {
 
 const auth = (...roles: UserRole[]) => {
     return async (req: Request, res: Response, next: NextFunction) => {
-        //* get user session
-        const session = await betterAuth.api.getSession({
-            headers: req.headers as any,
-        });
-
-        if (!session) {
-            return res.status(400).json({
-                success: false,
-                message: "You are not authorize.",
+        try {
+            //* get user session
+            const session = await betterAuth.api.getSession({
+                headers: req.headers as any,
             });
+
+            if (!session) {
+                return res.status(400).json({
+                    success: false,
+                    message: "You are not authorize.",
+                });
+            }
+
+            if (!session.user.emailVerified) {
+                return res.status(403).json({
+                    success: false,
+                    message:
+                        "Email verification required. Please verify your email.",
+                });
+            }
+
+            req.user = {
+                id: session.user.id,
+                email: session.user.email,
+                name: session.user.name,
+                role: session.user.role as string,
+                emailVerified: session.user.emailVerified,
+            };
+
+            if (roles && !roles.includes(req.user.role as UserRole)) {
+                return res.status(403).json({
+                    success: false,
+                    message:
+                        "Forbidden! You do not have the permission to access.",
+                });
+            }
+
+            next();
+        } catch (error: any) {
+            next(error);
         }
-
-        if (!session.user.emailVerified) {
-            return res.status(403).json({
-                success: false,
-                message:
-                    "Email verification required. Please verify your email.",
-            });
-        }
-
-        req.user = {
-            id: session.user.id,
-            email: session.user.email,
-            name: session.user.name,
-            role: session.user.role as string,
-            emailVerified: session.user.emailVerified,
-        };
-
-        if (roles && !roles.includes(req.user.role as UserRole)) {
-            return res.status(403).json({
-                success: false,
-                message: "Forbidden! You do not have the permission to access.",
-            });
-        }
-
-        next();
     };
 };
 
