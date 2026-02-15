@@ -44,7 +44,13 @@ export const auth = betterAuth({
     },
     emailVerification: {
         sendVerificationEmail: async ({ user, url, token }, request) => {
-            
+            const info = await transporter.sendMail({
+                from: '"Maddison Foo Koch" <maddison53@ethereal.email>',
+                to: "bar@example.com, baz@example.com",
+                subject: "Hello ✔",
+                text: "Hello world?", // Plain-text version of the message
+                html: "<b>Hello world?</b>", // HTML version of the message
+            });
         },
     },
 });
