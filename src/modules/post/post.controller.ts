@@ -29,6 +29,7 @@ const getAllPosts: RequestHandler = async (req, res) => {
         return res.status(201).json({
             success: true,
             message: "Post data retrieved successfully",
+            totalPost: result.length,
             data: result,
         });
     } catch (error: any) {
