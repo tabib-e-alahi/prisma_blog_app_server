@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { postService } from "./post.service";
 import { PostStatus } from "../../generated/prism/enums";
+import paginationSortingHelper from "../../helpers/paginationSortingHelper";
 
 const createPost: RequestHandler = async (req, res) => {
     try {
@@ -46,11 +47,18 @@ const getAllPosts: RequestHandler = async (req, res) => {
         //* filtering posts by status
         const status = req.query.status as PostStatus | undefined;
 
+        const {page, limit, skip, sortBy, sortOrder} = paginationSortingHelper(req.query)
+
         const result = await postService.getAllPosts({
             search,
             tags,
             isFeatured,
             status,
+            page,
+            limit,
+            skip,
+            sortBy,
+            sortOrder
         });
 
         return res.status(201).json({

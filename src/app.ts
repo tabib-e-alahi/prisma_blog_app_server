@@ -8,15 +8,15 @@ const app = express();
 
 app.use(
     cors({
-        origin: "*",
+        origin: [process.env.FRONEND_URL!],
         credentials: true,
     }),
 );
 
+
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
 app.use(express.json());
-
 
 app.use("/posts", postRouter);
 
