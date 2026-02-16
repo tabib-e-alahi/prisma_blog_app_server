@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { postService } from "./post.service";
+import { undefined } from "better-auth/*";
 
 const createPost: RequestHandler = async (req, res) => {
     try {
@@ -30,6 +31,8 @@ const getAllPosts: RequestHandler = async (req, res) => {
         const tags = req.query.tags ? (req.query.tags as string).split(",") : [];
 
         const result = await postService.getAllPosts({search, tags});
+
+        
 
         return res.status(201).json({
             success: true,
