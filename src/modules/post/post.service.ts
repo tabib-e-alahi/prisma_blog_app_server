@@ -23,23 +23,34 @@ const getAllPosts = async ({
     tags: string[] | [];
 }) => {
     const andConditions = [];
+
     if (search) {
         andConditions.push({
             OR: [
                 {
                     title: {
-                        contain: search,
+                        contains: search,
                         mode: "insensitive",
                     },
                 },
                 {
-                    
+                    content: {
+                        contains: search,
+                        mode: "insensitive",
+                    },
                 },
-                {},
+                {
+                    tags:{
+                        has: search
+                    }
+                },
             ],
         });
     }
-    const result = await prisma.post.findMany();
+
+    const result = await prisma.post.findMany({
+        
+    });
     return result;
 };
 
