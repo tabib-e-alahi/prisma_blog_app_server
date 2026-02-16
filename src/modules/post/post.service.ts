@@ -1,4 +1,5 @@
 import { Post } from "../../generated/prism/client";
+import { PostWhereInput } from "../../generated/prism/models";
 import { prisma } from "../../lib/prisma";
 
 const createPost = async (
@@ -22,7 +23,7 @@ const getAllPosts = async ({
     search: string | undefined;
     tags: string[] | [];
 }) => {
-    const andConditions = [];
+    const andConditions: PostWhereInput[] = [];
 
     if (search) {
         andConditions.push({
@@ -40,16 +41,26 @@ const getAllPosts = async ({
                     },
                 },
                 {
-                    tags:{
-                        has: search
-                    }
+                    tags: {
+                        has: search,
+                    },
                 },
             ],
         });
     }
 
+    if (tags.length > 0) {
+        andConditions.push({
+            tags: {
+                hasEvery: tags,
+            },
+        });
+    }
+
     const result = await prisma.post.findMany({
-        
+        where: {
+            AND: andConditions,
+        },
     });
     return result;
 };
