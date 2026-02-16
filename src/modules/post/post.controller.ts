@@ -25,13 +25,16 @@ const createPost: RequestHandler = async (req, res) => {
 
 const getAllPosts: RequestHandler = async (req, res) => {
     try {
+        //* searching post by title, content or any one of the tag
         const search =
             typeof req.query.search === "string" ? req.query.search : undefined;
 
+        //* GETTING post by tags
         const tags = req.query.tags
             ? (req.query.tags as string).split(",")
             : [];
 
+        //* filtering posts by isFatured value
         const isFeatured = req.query.isFeatured
             ? req.query.isFeatured === "true"
                 ? true
@@ -40,6 +43,7 @@ const getAllPosts: RequestHandler = async (req, res) => {
                   : undefined
             : undefined;
 
+        //* filtering posts by status
         const status = req.query.status as PostStatus | undefined;
 
         const result = await postService.getAllPosts({
