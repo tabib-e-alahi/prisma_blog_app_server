@@ -1,6 +1,5 @@
 import { RequestHandler } from "express";
 import { postService } from "./post.service";
-import { undefined } from "better-auth/*";
 
 const createPost: RequestHandler = async (req, res) => {
     try {
@@ -27,12 +26,24 @@ const getAllPosts: RequestHandler = async (req, res) => {
     try {
         const search =
             typeof req.query.search === "string" ? req.query.search : undefined;
-        
-        const tags = req.query.tags ? (req.query.tags as string).split(",") : [];
 
-        const result = await postService.getAllPosts({search, tags});
+        const tags = req.query.tags
+            ? (req.query.tags as string).split(",")
+            : [];
 
-        
+        const isFeatured = req.query.isFeatured
+            ? req.query.isFeatured === "true"
+                ? true
+                : req.query.isFeatured === "false"
+                  ? false
+                  : undefined
+            : undefined;
+
+        const result = await postService.getAllPosts({
+            search,
+            tags,
+            isFeatured,
+        });
 
         return res.status(201).json({
             success: true,
