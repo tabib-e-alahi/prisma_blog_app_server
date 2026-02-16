@@ -1,4 +1,4 @@
-import { Post } from "../../generated/prism/client";
+import { Post, PostStatus } from "../../generated/prism/client";
 import { PostWhereInput } from "../../generated/prism/models";
 import { prisma } from "../../lib/prisma";
 
@@ -20,10 +20,12 @@ const getAllPosts = async ({
     search,
     tags,
     isFeatured,
+    status
 }: {
     search: string | undefined;
     tags: string[] | [];
     isFeatured: boolean | undefined;
+    status: PostStatus | undefined
 }) => {
     const andConditions: PostWhereInput[] = [];
 
