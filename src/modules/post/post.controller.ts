@@ -47,7 +47,8 @@ const getAllPosts: RequestHandler = async (req, res) => {
         //* filtering posts by status
         const status = req.query.status as PostStatus | undefined;
 
-        const {page, limit, skip, sortBy, sortOrder} = paginationSortingHelper(req.query)
+        const { page, limit, skip, sortBy, sortOrder } =
+            paginationSortingHelper(req.query);
 
         const result = await postService.getAllPosts({
             search,
@@ -58,14 +59,13 @@ const getAllPosts: RequestHandler = async (req, res) => {
             limit,
             skip,
             sortBy,
-            sortOrder
+            sortOrder,
         });
 
         return res.status(201).json({
             success: true,
             message: "Post data retrieved successfully",
-            totalPost: result.length,
-            data: result,
+            result,
         });
     } catch (error: any) {
         return res.status(500).json({
@@ -76,7 +76,29 @@ const getAllPosts: RequestHandler = async (req, res) => {
     }
 };
 
+const getPostById: RequestHandler = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        if (!postId) {
+            throw new Error("Post Id is required!");
+        }
+        const result = await postService.getPostById(postId as string);
+        return res.status(201).json({
+            success: true,
+            message: "Post data retrieved successfully",
+            result,
+        });
+    } catch (error: any) {
+        return res.status(500).json({
+            success: false,
+            message: "Could nor retrieve post by id",
+            error: error.message,
+        });
+    }
+};
+
 export const postController = {
     createPost,
     getAllPosts,
+    getPostById,
 };
