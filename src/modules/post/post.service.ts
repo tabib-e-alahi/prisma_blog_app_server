@@ -67,6 +67,12 @@ const getAllPosts = async ({
         });
     }
 
+    if (status) {
+        andConditions.push({
+            status,
+        });
+    }
+
     const result = await prisma.post.findMany({
         where: {
             AND: andConditions,
