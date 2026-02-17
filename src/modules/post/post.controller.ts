@@ -97,21 +97,30 @@ const getPostById: RequestHandler = async (req, res) => {
     }
 };
 
-const getMyPosts: RequestHandler = async(req, res) =>{
+const getMyPosts: RequestHandler = async (req, res) => {
     try {
         const user = req.user;
-        if(!user){
+        if (!user) {
             throw new Error("You are not authorized.");
         }
-        const result = await postService.getMyPosts(user?.id as string);
-    } catch (error) {
-        
+        const result = await postService.getMyPosts(user.id as string);
+        return res.status(201).json({
+            success: true,
+            message: "Post fetched successfully.",
+            data: result,
+        });
+    } catch (error: any) {
+        return res.status(500).json({
+            success: false,
+            message: "Post fetched failed.",
+            error: error.message,
+        });
     }
-}
+};
 
 export const postController = {
     createPost,
     getAllPosts,
     getPostById,
-    getMyPosts
+    getMyPosts,
 };
