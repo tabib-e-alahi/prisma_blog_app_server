@@ -1,22 +1,22 @@
 enum CommentStatus {
-  APPROVED
-  REJECT
+      APPROVED
+      REJECT
 }
 
 model Comment {
-  id        String        @id @default(uuid())
-  content   String
-  authorId  String
-  postId    String
-  post      Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
-  parentId  String?
-  parent    Comment?      @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies   Comment[]     @relation("CommentReplies")
-  status    CommentStatus @default(APPROVED)
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+      id        String        @id @default(uuid())
+      content   String
+      authorId  String
+      postId    String
+      post      Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+      parentId  String?
+      parent    Comment?      @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+      replies   Comment[]     @relation("CommentReplies")
+      status    CommentStatus @default(APPROVED)
+      createdAt DateTime      @default(now())
+      updatedAt DateTime      @updatedAt
 
-  @@index([authorId])
-  @@index([postId])
-  @@map("comments")
+      @@index([authorId])
+      @@index([postId])
+      @@map("comments")
 }
