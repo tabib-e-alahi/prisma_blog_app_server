@@ -120,7 +120,20 @@ const updateComment = async (
 };
 
 const moderateComment = async(commentId: string, data: {status: CommentStatus}) =>{
-      const commentData = await prisma.
+      const commentData = await prisma.comment.findUniqueOrThrow({
+            where:{
+                  id: commentId;
+            },
+            select:{
+                  id: true,
+                  status: true
+            }
+      })
+
+      if(commentData.status === data.status){
+            throw new Error();
+            
+      }
 }
 
 export const commentService = {
