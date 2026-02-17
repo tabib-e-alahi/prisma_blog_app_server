@@ -134,7 +134,11 @@ const moderateComment = async(commentId: string, data: {status: CommentStatus}) 
             throw new Error(`Comment status "${commentData.status}" is already up to date.`);
       }
 
-      return await prisma.comment.
+      return await prisma.comment.update({
+            where:{
+                  id: commentId
+            }
+      })
 }
 
 export const commentService = {
