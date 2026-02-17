@@ -97,10 +97,21 @@ const getPostById: RequestHandler = async (req, res) => {
     }
 };
 
-const getMyPosts: RequestHandler = 
+const getMyPosts: RequestHandler = async(req, res) =>{
+    try {
+        const user = req.user;
+        if(!user){
+            throw new Error("");
+            
+        }
+    } catch (error) {
+        
+    }
+}
 
 export const postController = {
     createPost,
     getAllPosts,
     getPostById,
+    getMyPosts
 };
