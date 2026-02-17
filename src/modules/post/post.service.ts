@@ -167,9 +167,13 @@ const getPostById = async (postId: string) => {
     });
 };
 
+const getMyPosts = async (id: string) => {
+    const result = await prisma.post.
+};
+
 export const postService = {
     createPost,
     getAllPosts,
     getPostById,
-    getMyPosts
+    getMyPosts,
 };
