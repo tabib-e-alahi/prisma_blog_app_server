@@ -101,9 +101,9 @@ const getMyPosts: RequestHandler = async(req, res) =>{
     try {
         const user = req.user;
         if(!user){
-            throw new Error("");
-            
+            throw new Error("You are not authorized.");
         }
+        const result = await postService.getMyPosts(user?.id as string);
     } catch (error) {
         
     }
