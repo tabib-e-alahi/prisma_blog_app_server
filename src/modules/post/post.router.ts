@@ -23,7 +23,7 @@ router.post(
 router.patch(
     "/:postId",
     auth(UserRole.USER, UserRole.ADMIN),
-    PostController.updatePost
-)
+    postController.updatePost,
+);
 
 export const postRouter = router;
