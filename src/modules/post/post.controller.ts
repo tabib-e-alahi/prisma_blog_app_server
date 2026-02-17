@@ -134,13 +134,13 @@ const updatePost: RequestHandler = async (req, res) => {
             user.id,
             isAdmin,
         );
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: "Post data updated",
             data: result,
         });
     } catch (error: any) {
-        res.status(400).json({
+        return res.status(400).json({
             success: false,
             message: "Post update failed!",
             error: error.message,
@@ -148,34 +148,38 @@ const updatePost: RequestHandler = async (req, res) => {
     }
 };
 
-const deletePost :RequestHandler = async (req, res) => {
+const deletePost: RequestHandler = async (req, res) => {
     try {
         const user = req.user;
         if (!user) {
-            throw new Error("You are unauthorized!")
+            throw new Error("You are unauthorized!");
         }
 
         const { postId } = req.params;
-        const isAdmin = user.role === UserRole.ADMIN
-        const result = await postService.deletePost(postId as string, user.id, isAdmin);
-        res.status(200).json({
+        const isAdmin = user.role === UserRole.ADMIN;
+        const result = await postService.deletePost(
+            postId as string,
+            user.id,
+            isAdmin,
+        );
+        return res.status(200).json({
             success: true,
-            message: "Post data updated",
+            message: "Post data deleted",
             data: result,
         });
-    } catch (e) {
-        const errorMessage = (e instanceof Error) ? e.message : "Post delete failed!"
-        res.status(400).json({
-            error: errorMessage,
-            details: e
-        })
+    } catch (error: any) {
+        return res.status(400).json({
+            success: false,
+            message: "Post delete failed!",
+            error: error.message,
+        });
     }
-}
+};
 
 export const postController = {
     createPost,
     getAllPosts,
     getPostById,
     getMyPosts,
-    updatePost
+    updatePost,
 };
