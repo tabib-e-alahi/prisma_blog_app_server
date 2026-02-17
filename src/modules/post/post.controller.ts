@@ -97,6 +97,8 @@ const getPostById: RequestHandler = async (req, res) => {
     }
 };
 
+const getMyPosts: RequestHandler = 
+
 export const postController = {
     createPost,
     getAllPosts,
