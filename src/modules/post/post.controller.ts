@@ -123,27 +123,35 @@ const updatePost: RequestHandler = async (req, res) => {
     try {
         const user = req.user;
         if (!user) {
-            throw new Error("You are unauthorized!")
+            throw new Error("You are unauthorized!");
         }
 
         const { postId } = req.params;
-        const isAdmin = user.role === UserRole.ADMIN
-        const result = await postService.updatePost(postId as string, req.body, user.id, isAdmin);
+        const isAdmin = user.role === UserRole.ADMIN;
+        const result = await postService.updatePost(
+            postId as string,
+            req.body,
+            user.id,
+            isAdmin,
+        );
         res.status(200).json({
             success: true,
             message: "Post data updated",
-            data: result
-        })
+            data: result,
+        });
     } catch (error: any) {
         res.status(400).json({
+            success: false,
+            message: "Post update failed!",
             error: error.message,
-        })
+        });
     }
-}
+};
 
 export const postController = {
     createPost,
     getAllPosts,
     getPostById,
     getMyPosts,
+    updatePost
 };
