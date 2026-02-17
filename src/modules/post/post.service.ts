@@ -246,4 +246,5 @@ export const postService = {
     getAllPosts,
     getPostById,
     getMyPosts,
+    updatePost
 };
