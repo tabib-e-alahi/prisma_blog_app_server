@@ -226,8 +226,9 @@ const updatePost = async (postId: string, data: Partial<Post>, authorId: string,
         throw new Error("You are not the owner/creator of the post!")
     }
 
+    // only admin isFeatured er value change korte parbe
     if (!isAdmin) {
-        delete data.isFeatured
+        delete data.isFeatured 
     }
 
     const result = await prisma.post.update({
