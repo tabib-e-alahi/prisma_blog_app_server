@@ -5,7 +5,7 @@ import auth, { UserRole } from "../../middleware/auth";
 const router = Router();
 
 router.get("/", postController.getAllPosts);
-
+router.get("/stats", auth(UserRole.ADMIN), postController.getStats);
 router.get("/:postId", postController.getPostById);
 
 router.get(

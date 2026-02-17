@@ -196,4 +196,5 @@ export const postController = {
     getMyPosts,
     updatePost,
     deletePost,
+    getStats
 };
