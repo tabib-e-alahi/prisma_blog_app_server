@@ -99,7 +99,6 @@ const getPostById: RequestHandler = async (req, res) => {
 
 const getMyPosts: RequestHandler = async (req, res) => {
     try {
-        console.log("hitted");
         const user = req.user;
         if (!user) {
             throw new Error("You are not authorized.");
