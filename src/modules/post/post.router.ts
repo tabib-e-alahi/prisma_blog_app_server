@@ -7,7 +7,7 @@ const router = Router();
 router.get("/", postController.getAllPosts);
 
 router.get(
-    "/my-posts",
+    "/getMyPost/my-posts",
     auth(UserRole.USER, UserRole.ADMIN),
     postController.getMyPosts,
 );
