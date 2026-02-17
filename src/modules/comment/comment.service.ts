@@ -119,10 +119,15 @@ const updateComment = async (
     });
 };
 
+const moderateComment = async(commentId: string, data: {status: CommentStatus}) =>{
+      
+}
+
 export const commentService = {
     createComment,
     getCommentById,
     getCommentByAuthorId,
     deleteComment,
     updateComment,
+    moderateComment
 };
