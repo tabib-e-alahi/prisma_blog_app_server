@@ -168,6 +168,16 @@ const getPostById = async (postId: string) => {
 };
 
 const getMyPosts = async (authorId: string) => {
+    await prisma.user.findUniqueOrThrow({
+        where: {
+            id: authorId,
+            status: "ACTIVE",
+        },
+        select: {
+            id: true,
+        },
+    });
+
     const result = await prisma.post.findMany({
         where: {
             authorId,
@@ -183,6 +193,15 @@ const getMyPosts = async (authorId: string) => {
             },
         },
     });
+
+    // const total = await prisma.post.aggregate({
+    //     _count: {
+    //         id: true
+    //     },
+    //     where: {
+    //         authorId
+    //     }
+    // })
 
     return result;
 };
