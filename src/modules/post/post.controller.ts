@@ -118,6 +118,8 @@ const getMyPosts: RequestHandler = async (req, res) => {
     }
 };
 
+
+
 export const postController = {
     createPost,
     getAllPosts,
