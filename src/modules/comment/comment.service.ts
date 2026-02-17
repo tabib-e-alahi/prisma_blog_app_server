@@ -135,7 +135,7 @@ const moderateComment = async (
 
     if (commentData.status === data.status) {
         throw new Error(
-            `This comment '${commentData.status}' is already .`,
+            `This comment is already '${commentData.status}'.`,
         );
     }
 
