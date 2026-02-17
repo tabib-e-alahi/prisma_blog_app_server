@@ -172,7 +172,19 @@ const getMyPosts = async (id: string) => {
         where: {
             authorId: id,
         },
+        orderBy: {
+            createdAt: "desc",
+        },
+        include: {
+            _count: {
+                select: {
+                    comments: true,
+                },
+            },
+        },
     });
+
+    return result;
 };
 
 export const postService = {
