@@ -11,8 +11,8 @@ router.get("/:postId", postController.getPostById);
 router.get(
     "/myPosts",
     auth(UserRole.USER, UserRole.ADMIN),
-    postController.getMyPosts
-)
+    postController.getMyPosts,
+);
 
 router.post(
     "/",
