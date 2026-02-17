@@ -131,13 +131,12 @@ const updatePost: RequestHandler = async (req, res) => {
         const result = await postService.updatePost(postId as string, req.body, user.id, isAdmin);
         res.status(200).json({
             success: true,
-            mess
+            message: "Post data updated",
+            data: result
         })
-    } catch (e) {
-        const errorMessage = (e instanceof Error) ? e.message : "Post update failed!"
+    } catch (error: any) {
         res.status(400).json({
-            error: errorMessage,
-            details: e
+            error: error.message,
         })
     }
 }
