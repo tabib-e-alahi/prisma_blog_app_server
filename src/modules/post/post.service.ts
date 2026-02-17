@@ -171,7 +171,7 @@ const getMyPosts = async (authorId: string) => {
     await prisma.user.findUniqueOrThrow({
         where: {
             id: authorId,
-            status: "ACTIVE",
+            status: "ACTIVE", // only active user can fetched their data
         },
         select: {
             id: true,
