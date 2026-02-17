@@ -120,7 +120,7 @@ const updateComment = async (
 };
 
 const moderateComment = async(commentId: string, data: {status: CommentStatus}) =>{
-      
+      const commentData = await prisma.
 }
 
 export const commentService = {
