@@ -1,10 +1,10 @@
-import { RequestHandler } from "express";
+import { NextFunction, RequestHandler } from "express";
 import { postService } from "./post.service";
 import { PostStatus } from "../../generated/prism/enums";
 import paginationSortingHelper from "../../helpers/paginationSortingHelper";
 import { UserRole } from "../../middleware/auth";
 
-const createPost: RequestHandler = async (req, res) => {
+const createPost: RequestHandler = async (req, res, next: NextFunction) => {
     try {
         if (!req.user) {
             throw new Error("Unauthorized Access");
@@ -17,11 +17,7 @@ const createPost: RequestHandler = async (req, res) => {
             data: result,
         });
     } catch (error: any) {
-        return res.status(500).json({
-            success: false,
-            message: "Post creation failed.",
-            error: error.message,
-        });
+        next(error);
     }
 };
 
@@ -179,15 +175,16 @@ const deletePost: RequestHandler = async (req, res) => {
 const getStats: RequestHandler = async (req, res) => {
     try {
         const result = await postService.getStats();
-        res.status(200).json(result)
+        res.status(200).json(result);
     } catch (e) {
-        const errorMessage = (e instanceof Error) ? e.message : "Stats fetched failed!"
+        const errorMessage =
+            e instanceof Error ? e.message : "Stats fetched failed!";
         res.status(400).json({
             error: errorMessage,
-            details: e
-        })
+            details: e,
+        });
     }
-}
+};
 
 export const postController = {
     createPost,
@@ -196,5 +193,5 @@ export const postController = {
     getMyPosts,
     updatePost,
     deletePost,
-    getStats
+    getStats,
 };
