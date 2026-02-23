@@ -7,7 +7,7 @@ async function seedAdmin() {
         const adminData = {
             name: "Admin2 Saheb",
             email: "admin2@admin.com",
-            role: UserRole.ADMIN,
+            role: UserRole.admin,
             password: "admin1234",
         };
         console.log("***** Checking Admin Exist or not");
@@ -47,8 +47,8 @@ async function seedAdmin() {
             });
 
             console.log("**** Email verification status updated!");
+            console.log("******* SUCCESS ******");
         }
-        console.log("******* SUCCESS ******");
     } catch (error) {
         console.error(error);
     }
