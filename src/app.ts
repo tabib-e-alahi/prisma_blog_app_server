@@ -9,12 +9,10 @@ import { notFound } from "./middleware/notFound";
 
 const app = express();
 
-app.use(
-    cors({
-        origin: [process.env.FRONEND_URL!],
-        credentials: true,
-    }),
-);
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
