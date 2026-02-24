@@ -22,7 +22,7 @@ async function seedAdmin() {
             throw new Error("User already exists!!");
         }
 
-        const signUpAdmin = await fetch("http://localhost:3000/api/auth/sign-up/email", {
+        const signUpAdmin = await fetch("http://localhost:8000/api/auth/sign-up/email", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
