@@ -186,7 +186,7 @@ export type UserGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   role: string | null
-  phone: string
+  phone: string | null
   status: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
@@ -220,7 +220,7 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   role?: Prisma.StringNullableFilter<"User"> | string | null
-  phone?: Prisma.StringFilter<"User"> | string
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
   status?: Prisma.StringNullableFilter<"User"> | string | null
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
@@ -235,7 +235,7 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrderInput | Prisma.SortOrder
-  phone?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
@@ -253,7 +253,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   role?: Prisma.StringNullableFilter<"User"> | string | null
-  phone?: Prisma.StringFilter<"User"> | string
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
   status?: Prisma.StringNullableFilter<"User"> | string | null
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
@@ -268,7 +268,7 @@ export type UserOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   role?: Prisma.SortOrderInput | Prisma.SortOrder
-  phone?: Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -287,7 +287,7 @@ export type UserScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   role?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  phone?: Prisma.StringWithAggregatesFilter<"User"> | string
+  phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   status?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
@@ -300,7 +300,7 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role?: string | null
-  phone: string
+  phone?: string | null
   status?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
@@ -315,7 +315,7 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role?: string | null
-  phone: string
+  phone?: string | null
   status?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
@@ -330,7 +330,7 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
@@ -345,7 +345,7 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -360,7 +360,7 @@ export type UserCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role?: string | null
-  phone: string
+  phone?: string | null
   status?: string | null
 }
 
@@ -373,7 +373,7 @@ export type UserUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -386,7 +386,7 @@ export type UserUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -487,7 +487,7 @@ export type UserCreateWithoutSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role?: string | null
-  phone: string
+  phone?: string | null
   status?: string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
 }
@@ -501,7 +501,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role?: string | null
-  phone: string
+  phone?: string | null
   status?: string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
 }
@@ -531,7 +531,7 @@ export type UserUpdateWithoutSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
 }
@@ -545,7 +545,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -559,7 +559,7 @@ export type UserCreateWithoutAccountsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role?: string | null
-  phone: string
+  phone?: string | null
   status?: string | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
@@ -573,7 +573,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   role?: string | null
-  phone: string
+  phone?: string | null
   status?: string | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -603,7 +603,7 @@ export type UserUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
@@ -617,7 +617,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -741,7 +741,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdAt: Date
     updatedAt: Date
     role: string | null
-    phone: string
+    phone: string | null
     status: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
