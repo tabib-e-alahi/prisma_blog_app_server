@@ -10,7 +10,7 @@ model User {
       accounts      Account[]
 
       role   String? @default("USER")
-      phone  String
+      phone  String?
       status String? @default("ACTIVE")
 
       @@unique([email])
