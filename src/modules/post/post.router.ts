@@ -1,35 +1,46 @@
-import { Router } from "express";
-import { postController } from "./post.controller";
-import auth, { UserRole } from "../../middleware/auth";
+import express, { Router } from 'express';
+import { PostController } from './post.controller';
+import auth, { UserRole } from '../../middlewares/auth';
 
-const router = Router();
-
-router.get("/", postController.getAllPosts);
-router.get("/stats", auth(UserRole.ADMIN), postController.getStats);
-router.get("/:postId", postController.getPostById);
+const router = express.Router();
 
 router.get(
-    "/getMyPost/my-posts",
+    "/",
+    PostController.getAllPost
+)
+router.get(
+    "/stats",
+    auth(UserRole.ADMIN),
+    PostController.getStats
+)
+
+router.get(
+    "/my-posts",
     auth(UserRole.USER, UserRole.ADMIN),
-    postController.getMyPosts,
-);
+    PostController.getMyPosts
+)
+
+router.get(
+    "/:postId",
+    PostController.getPostById
+)
 
 router.post(
     "/",
     auth(UserRole.USER, UserRole.ADMIN),
-    postController.createPost,
-);
+    PostController.createPost
+)
 
 router.patch(
     "/:postId",
     auth(UserRole.USER, UserRole.ADMIN),
-    postController.updatePost,
-);
+    PostController.updatePost
+)
 
 router.delete(
     "/:postId",
     auth(UserRole.USER, UserRole.ADMIN),
-    postController.deletePost,
-);
+    PostController.deletePost
+)
 
-export const postRouter = router;
+export const postRouter: Router = router;

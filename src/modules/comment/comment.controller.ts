@@ -1,142 +1,94 @@
-import { RequestHandler } from "express";
-import { commentService } from "./comment.service";
-import { error } from "node:console";
-import { success } from "better-auth/*";
+import { Request, Response } from "express";
+import { CommentService } from "./comment.service";
 
-const createComment: RequestHandler = async (req, res) => {
+const createComment = async (req: Request, res: Response) => {
     try {
         const user = req.user;
         req.body.authorId = user?.id;
-
-        const result = await commentService.createComment(req.body);
-
-        return res.status(201).json({
-            success: true,
-            message: "Comment created successfully",
-            data: result,
-        });
-    } catch (error: any) {
-        return res.status(500).json({
-            success: false,
-            message: "Comment creation failed!",
-            error: error.message,
-        });
+        const result = await CommentService.createComment(req.body)
+        res.status(201).json(result)
+    } catch (e) {
+        res.status(400).json({
+            error: "Comment creation failed",
+            details: e
+        })
     }
-};
-const getCommentById: RequestHandler = async (req, res) => {
+}
+
+const getCommentById = async (req: Request, res: Response) => {
     try {
-        const { commentId } = req.params;
-        const result = await commentService.getCommentById(commentId as string);
-
-        return res.status(201).json({
-            success: true,
-            message: "Comment Fetched successfully",
-            data: result,
-        });
-    } catch (error: any) {
-        return res.status(500).json({
-            success: false,
-            message: "Comment creation failed!",
-            error: error.message,
-        });
+        const { commentId } = req.params
+        const result = await CommentService.getCommentById(commentId as string)
+        res.status(200).json(result)
+    } catch (e) {
+        res.status(400).json({
+            error: "Comment fetched failed",
+            details: e
+        })
     }
-};
-const getCommentByAuthorId: RequestHandler = async (req, res) => {
+}
+
+const getCommentsByAuthor = async (req: Request, res: Response) => {
     try {
-        const { authorId } = req.params;
-        const result = await commentService.getCommentByAuthorId(
-            authorId as string,
-        );
-
-        return res.status(201).json({
-            success: true,
-            message: "Comment Fetched successfully",
-            data: result,
-        });
-    } catch (error: any) {
-        return res.status(500).json({
-            success: false,
-            message: "Comment creation failed!",
-            error: error.message,
-        });
+        const { authorId } = req.params
+        const result = await CommentService.getCommentsByAuthor(authorId as string)
+        res.status(200).json(result)
+    } catch (e) {
+        res.status(400).json({
+            error: "Comment fetched failed",
+            details: e
+        })
     }
-};
+}
 
-const deleteComment: RequestHandler = async (req, res) => {
+const deleteComment = async (req: Request, res: Response) => {
     try {
         const user = req.user;
         const { commentId } = req.params;
-        const result = await commentService.deleteComment(
-            commentId as string,
-            user?.id as string,
-        );
-        return res.status(201).json({
-            success: true,
-            message: "Comment deleted successfully",
-            data: result,
-        });
-    } catch (error: any) {
-        console.log(error);
+        const result = await CommentService.deleteComment(commentId as string, user?.id as string)
+        res.status(200).json(result)
+    } catch (e) {
+        console.log(e)
         res.status(400).json({
-            success: false,
-            message: "Comment delete failed!",
-            error: error,
-        });
+            error: "Comment delete failed!",
+            details: e
+        })
     }
-};
-
-const updateComment: RequestHandler = async (req, res) => {
+}
+const updateComment = async (req: Request, res: Response) => {
     try {
         const user = req.user;
         const { commentId } = req.params;
-        const result = await commentService.updateComment(
-            commentId as string,
-            req.body,
-            user?.id as string,
-        );
-        return res.status(201).json({
-            success: true,
-            message: "Comment updated successfully",
-            data: result,
-        });
-    } catch (error: any) {
-        console.log(error);
+        const result = await CommentService.updateComment(commentId as string, req.body, user?.id as string)
+        res.status(200).json(result)
+    } catch (e) {
+        console.log(e)
         res.status(400).json({
-            success: false,
-            message: "Comment update failed!",
-            error: error.message,
-        });
+            error: "Comment update failed!",
+            details: e
+        })
     }
-};
+}
 
-const moderateComment: RequestHandler = async (req, res) => {
+const moderateComment = async (req: Request, res: Response) => {
     try {
         const { commentId } = req.params;
-        const result = await commentService.moderateComment(
-            commentId as string,
-            req.body,
-        );
-
-        return res.status(201).json({
-            success: true,
-            message: "Comment status updated",
-            data: result,
-        });
-    } catch (error: any) {
-        console.log(error);
+        const result = await CommentService.moderateComment(commentId as string, req.body)
+        res.status(200).json(result)
+    } catch (e) {
+        const errorMessage = (e instanceof Error) ? e.message : "Comment update failed!"
         res.status(400).json({
-            success: false,
-            message: "Comment status update failed!",
-            error: error.message,
-        });
+            error: errorMessage,
+            details: e
+        })
     }
-};
+}
 
-export const commentController = {
+export const CommentController = {
     createComment,
     getCommentById,
-    getCommentByAuthorId,
+    getCommentsByAuthor,
     deleteComment,
     updateComment,
-    moderateComment,
-};
+    moderateComment
+}
