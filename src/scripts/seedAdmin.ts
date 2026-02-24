@@ -29,7 +29,7 @@ async function seedAdmin() {
             },
             body: JSON.stringify(adminData)
         })
-
+console.log();
 
 
         if (signUpAdmin.ok) {
