@@ -36,7 +36,7 @@ export const auth = betterAuth({
             },
         },
     },
-    trustedOrigins: [process.env.FRONEND_URL!],
+    trustedOrigins: ["http://localhost:3000"],
     emailAndPassword: {
         enabled: true,
         autoSignIn: false,
