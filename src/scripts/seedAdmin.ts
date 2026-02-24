@@ -44,9 +44,8 @@ async function seedAdmin() {
             })
 
             console.log("**** Email verification status updated!")
+            console.log("******* SUCCESS ******")
         }
-        console.log("******* SUCCESS ******")
-
     } catch (error) {
         console.error(error);
     }
